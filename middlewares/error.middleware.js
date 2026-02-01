@@ -1,4 +1,4 @@
-const errorMiddleware = (err, _req, res, next) => {
+const errorMiddleware = (err, _req, res) => {
   const statusCode = err.code;
   const message = err.message;
   res.status(statusCode).send({
