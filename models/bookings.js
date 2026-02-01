@@ -2,17 +2,11 @@ const mongoose = require('mongoose') ;
 
 
 const bookingsSchema = mongoose.Schema({
-    guest_name : {
-        type : String , 
-        required : true 
-    },
-    guest_email : {
-        type : String , 
-        required : true 
-    },
-    guest_note : {
-        type : String 
-    },
+    guest : [{
+        name : { type : String , required : true } ,
+        email : { type : String , required : true } ,
+        note : { type : String }
+    }] ,
     from : {
         type : Number ,
         required : true 
@@ -27,6 +21,10 @@ const bookingsSchema = mongoose.Schema({
     },
     meeting_id : {
         type : String ,
+        required : true 
+    },
+    date : {
+        type : Date ,
         required : true 
     }
 } , { timestamps : true }  ) ;

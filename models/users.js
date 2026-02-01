@@ -11,8 +11,7 @@ const usersSchema = mongoose.Schema({
         unique : true 
     } ,
     password : {
-        type : String , 
-        required : true 
+        type : String
     },
     social_media : {
         type : String ,
