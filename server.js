@@ -1,7 +1,7 @@
 require("dotenv").config();
 const { app } = require("./app");
 const { config } = require("./config/config");
-const { connectDB } = require("./connections/mongoose.config");
+const { connectDB } = require("./connections/mongoose.connection");
 const { logger } = require("./config/winston.config");
 const { initializeModels } = require("./models");
 
