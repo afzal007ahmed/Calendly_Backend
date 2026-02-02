@@ -16,15 +16,16 @@ const getBookingEndDateTime = (booking) => {
   return date;
 };
 
-exports.getMeetings = async (req, res) => {
+exports.getMeetings = async (req, res, next) => {
   try {
     const { type } = req.query;
 
     if (!["upcoming", "past"].includes(type)) {
-      return res.status(400).json({
-        success: false,
-        message: "type must be upcoming or past",
-      });
+      const error = new Error();
+      error.statusCode = 400;
+      error.message = "It should be either past or upcoming";
+      error.code = "INVALID_QUERY";
+      throw error;
     }
 
     const now = new Date();
@@ -53,13 +54,14 @@ exports.getMeetings = async (req, res) => {
       data: filteredMeetings,
     });
   } catch (err) {
-    console.error("GET MEETINGS ERROR:", err);
+    // console.error("GET MEETINGS ERROR:", err);
 
-    return res.status(500).json({
-      success: false,
-      message: "Failed to fetch meetings",
-      error: err.message,
-    });
+    // return res.status(500).json({
+    //   success: false,
+    //   message: "Failed to fetch meetings",
+    //   error: err.message,
+    // });
+    next(err);
   }
 };
 

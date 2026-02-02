@@ -1,14 +1,10 @@
-const errorMiddleware = (err, _req, res, _next) => {
-  console.error(err); // helpful for debugging
-
+const errorMiddleware = (err, _req, res, next) => {
   const statusCode = err.statusCode || 500;
-  const code = err.code || "INTERNAL_ERROR";
-  const message = err.message || "Something went wrong";
-
-  res.status(statusCode).json({
-    success: false,
-    message,
-    code,
+  const code = err.code || "UNKNOWN";
+  const message = err.message || "SOMETHING WENT WRONG";
+  res.status(statusCode).send({
+    message: message,
+    code: code,
   });
 };
 

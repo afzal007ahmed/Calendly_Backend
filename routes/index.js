@@ -1,7 +1,11 @@
-const router = require("express").Router();
+const Router = require("express").Router();
+const { authRouter } = require("./auth");
+const meeting = require("./meeting.route");
 
 // router.use("/auth", require("./auth.routes"));
 // router.use("/bookings", require("./booking.routes"));
-router.use("/meetings", require("./meeting.route"));
 
-module.exports = router;
+Router.use("/auth", authRouter);
+
+Router.use("/meetings", meeting);
+module.exports = { Router };
