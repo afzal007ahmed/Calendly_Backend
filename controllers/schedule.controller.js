@@ -105,6 +105,7 @@ const getScheduleById = async (req, res) => {
   }
 };
 
+// check : remove if unused
 const getDetailsofPublicLink = async (req, res) => {
   try {
     const { username, schedule_id } = req.params;

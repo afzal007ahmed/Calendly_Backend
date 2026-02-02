@@ -6,7 +6,7 @@ const scheduleRouter = require("./schedule.route");
 
 router.use("/auth", authRouter);
 
-router.use("/", scheduleRouter);
+router.use("/schedules", scheduleRouter);
 
 router.use("/meetings", require("./meeting.route"));
 
