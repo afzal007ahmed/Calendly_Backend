@@ -5,7 +5,6 @@ const express = require("express");
 const router = express.Router();
 const { authRouter } = require("./auth");
 const { googleRouter } = require("./google");
-const authRouter = require("./auth");
 const scheduleRouter = require("./schedule.route");
 
 router.use("/google", googleRouter);

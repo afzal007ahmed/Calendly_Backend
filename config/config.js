@@ -14,7 +14,9 @@ const config = {
   google : {
     client_id : process.env.GOOGLE_CILENT_ID,
     redirect_uri : process.env.REDIRECT_URI,
-    auth_url : process.env.GOOGLE_AUTH_URL
+    auth_url : process.env.GOOGLE_AUTH_URL ,
+    token_url : process.env.TOKEN_URL,
+    client_secret : process.env.GOOGLE_CLIENT_SECRET
   }
 };
 
