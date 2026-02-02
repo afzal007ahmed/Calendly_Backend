@@ -4,7 +4,7 @@ const { getAllSchedules, getScheduleById, createSchedule } = require("../control
 const router = Router();
 
 router.route('/').get(getAllSchedules)
-// router.route('/').get(getScheduleById) // update
+router.route('/:scheduleId').get(getScheduleById) // update
 router.route('/').post(createSchedule) 
 router.route('/book/').get(getScheduleById) //update
 
