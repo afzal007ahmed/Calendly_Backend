@@ -1,14 +1,21 @@
 const {
   googleAuthMiddleware,
 } = require("../middlewares/googleAuth.middleware");
+const express = require("express");
+const router = express.Router();
 const { authRouter } = require("./auth");
 const { googleRouter } = require("./google");
+const authRouter = require("./auth");
+const scheduleRouter = require("./schedule.route");
 
-const Router = require("express").Router();
+router.use("/google", googleRouter);
 
-Router.use("/auth", authRouter);
-Router.use("/google", googleRouter);
+router.use(googleAuthMiddleware);
 
-Router.use(googleAuthMiddleware);
+router.use("/auth", authRouter);
 
-module.exports = { Router };
+router.use("/", scheduleRouter);
+
+router.use("/meetings", require("./meeting.route"));
+
+module.exports = router;

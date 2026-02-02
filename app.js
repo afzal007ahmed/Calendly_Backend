@@ -1,13 +1,15 @@
 const express = require('express') ;
 const { errorMiddleware } = require('./middlewares/error.middleware');
-const { Router } = require('./routes/index');
-const { googleAuthMiddleware } = require('./middlewares/googleAuth.middleware');
 const app = express() ;
 
-app.use( express.json() ) ;
+const router = require("./routes"); 
 
-app.use('/' , Router) ;
+const errorMiddleware = require("./middlewares/error.middleware");
 
-app.use( errorMiddleware ) ;
+app.use(express.json());
 
-module.exports = { app } ;
+app.use("/", router);
+
+app.use(errorMiddleware);
+
+module.exports = { app };
