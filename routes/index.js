@@ -8,4 +8,6 @@ router.use("/auth", authRouter);
 
 router.use("/", scheduleRouter);
 
+router.use("/meetings", require("./meeting.route"));
+
 module.exports = router;
