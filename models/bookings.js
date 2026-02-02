@@ -23,6 +23,11 @@ const bookingsSchema = mongoose.Schema({
         type : String ,
         required : true 
     },
+    host_id : {
+      type : mongoose.Schema.Types.ObjectId  ,
+      required : true ,
+      ref : "Users"
+    },
     date : {
         type : Date ,
         required : true 
