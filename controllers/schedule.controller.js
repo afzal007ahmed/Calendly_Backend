@@ -41,10 +41,9 @@ const getAllSchedules = async (req, res) => {
     });
 
   } catch (err) {
-    res.status(500).json({
-      code: "ERROR GETTING SCHEDULE",
-      message: err.message
-    });
+    err.statusCode = 500;
+    err.code = "ERROR_GETTING_SCHEDULES";
+    next(err);
   }
 };
 
@@ -100,10 +99,9 @@ const getScheduleById = async (req, res) => {
     });
 
   } catch (err) {
-    res.status(500).json({
-      code: "OTHER",
-      message: err.message
-    });
+    err.statusCode = 500;
+    err.code = "ERROR_GETTING_SCHEDULES";
+    next(err);
   }
 };
 
@@ -161,10 +159,9 @@ const getDetailsofPublicLink = async (req, res) => {
       },
     });
   } catch (err) {
-    return res.status(500).json({
-      code: "OTHER",
-      message: err.message,
-    });
+    err.statusCode = 500;
+    err.code = "ERROR_GETTING_PUBLICLINK";
+    next(err);
   }
 };
 
@@ -192,10 +189,9 @@ const createSchedule = async (req, res) => {
       data: schedule,
     });
   } catch (err) {
-    return res.status(400).json({
-      code: "OTHER",
-      message: err.message,
-    });
+    err.statusCode = 500;
+    err.code = "ERROR_CREATING_SCHEDULES";
+    next(err);
   }
 };
 
