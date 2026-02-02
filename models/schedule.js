@@ -4,15 +4,15 @@ const scheduleSchema = mongoose.Schema({
   duration: {
     type: Number,
     required: true,
+    min : 15 ,
+    max : 720 
   },
   limit: {
     type: Number,
   },
   type_of_meeting: {
     type: String,
-    required : true,
-    min : 15 ,
-    max : 720 
+    required : true
   },
   host_id: {
     type : mongoose.Schema.Types.ObjectId ,

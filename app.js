@@ -1,14 +1,14 @@
-const express = require('express') ;
-const { errorMiddleware } = require('./middlewares/error.middleware');
-const app = express() ;
-const scheduleRouter = require('./routes/schedule.route.js')
+const express = require("express");
+const app = express();
 
+const router = require("./routes"); 
 
-app.use( express.json() ) ;
+const errorMiddleware = require("./middlewares/error.middleware");
 
+app.use(express.json());
 
-app.use( errorMiddleware ) ;
+app.use("/", router);
 
-app.use('/', scheduleRouter)
+app.use(errorMiddleware);
 
-module.exports = { app } ;
+module.exports = { app };

@@ -1,20 +1,17 @@
-const { mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const Availability = require("../models/availability");
-
+const Users = require('../models/users')
 const Schedule = require('../models/schedule');
 
 const getAllSchedules = async (req, res) => {
   try {
-
-    const {userId} = req.body;
-
+    const userId = req.user?.id;
     if(!userId){
-        return res.status(400).json({
-            code: "INVALID_USER_ID",
-            message: "Valid userId is required"
-        });
+      return res.status(400).json({
+          code: "INVALID_USER_ID",
+          message: "Valid userId is required"
+      });
     }
-    
     const userObjectId = new mongoose.Types.ObjectId(userId);
 
     const schedules = await Schedule.find({
@@ -54,7 +51,7 @@ const getAllSchedules = async (req, res) => {
 const getScheduleById = async (req, res) => {
   try {
     const { scheduleId } = req.params;
-    const { userId } = req.body; 
+    const userId = req.user?.id; 
 
     if (
       !mongoose.Types.ObjectId.isValid(scheduleId) ||
@@ -110,20 +107,102 @@ const getScheduleById = async (req, res) => {
   }
 };
 
+const getDetailsofPublicLink = async (req, res) => {
+  try {
+    const { username, schedule_id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(schedule_id)) {
+      return res.status(400).json({
+        code: "INVALID_SCHEDULE_ID",
+        message: "Invalid schedule id",
+      });
+    }
 
-const getDetailsofPublicLink = async(req, res) => {
+    const user = await Users.findOne({ name: username }).select(
+      "_id name email"
+    );
 
-}
+    if (!user) {
+      return res.status(404).json({
+        code: "USER_NOT_FOUND",
+        message: "User not found",
+      });
+    }
+
+    const schedule = await Schedule.findOne({
+      _id: schedule_id,
+      host_id: user._id,
+    });
+
+    if (!schedule) {
+      return res.status(404).json({
+        code: "SCHEDULE_NOT_FOUND",
+        message: "Schedule not found",
+      });
+    }
+
+    const availability = await Availability.find({
+      user_id: user._id,
+    }).select("day from to -_id");
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        host: {
+          name: user.name,
+          email: user.email,
+        },
+        schedule: {
+          id: schedule._id,
+          meeting_name: schedule.subject,
+          duration: schedule.duration,
+          type_of_meeting: schedule.type_of_meeting,
+        },
+        availability,
+      },
+    });
+  } catch (err) {
+    return res.status(500).json({
+      code: "OTHER",
+      message: err.message,
+    });
+  }
+};
 
 const createSchedule = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const { meeting_name, type_of_meeting, duration } = req.body;
 
-}
+    if (!userId) {
+      return res.status(401).json({
+        code: "UNAUTHORIZED",
+        message: "User not authenticated",
+      });
+    }
 
+    const schedule = await Schedule.create({
+      host_id: userId,                
+      subject: meeting_name,
+      duration: duration,
+      type_of_meeting: type_of_meeting,
+    });
+
+    return res.status(201).json({
+      success: true,
+      data: schedule,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      code: "OTHER",
+      message: err.message,
+    });
+  }
+};
 
 
 module.exports = {
-    getAllSchedules,
-    getScheduleById,
-    getDetailsofPublicLink,
-    createSchedule
+  getAllSchedules,
+  getScheduleById,
+  getDetailsofPublicLink,
+  createSchedule
 }

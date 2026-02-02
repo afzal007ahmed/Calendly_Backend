@@ -1,11 +1,18 @@
-const { Router } = require("express");
-const { getAllSchedules, getScheduleById, createSchedule } = require("../controllers/schedule");
+const express = require("express");
+const router = express.Router();
 
-const router = Router();
+const {
+  getAllSchedules,
+  getScheduleById,
+  createSchedule,
+  getDetailsofPublicLink
+} = require("../controllers/schedule.controller");
 
-router.route('/').get(getAllSchedules)
-router.route('/:scheduleId').get(getScheduleById) // update
-router.route('/').post(createSchedule) 
-router.route('/book/').get(getScheduleById) //update
+const auth = require("../middlewares/auth.middleware");
 
-module.exports = router
+router.get("/", auth, getAllSchedules);
+router.get("/:scheduleId", auth, getScheduleById);
+router.post("/", auth, createSchedule);
+router.get("/book/:username/:schedule_id",getDetailsofPublicLink)
+
+module.exports = router;
