@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
   "dependencies": {
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
@@ -7,5 +11,8 @@
     "mongoose": "^9.1.5",
     "uuid": "^13.0.0",
     "winston": "^3.19.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }

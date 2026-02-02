@@ -1,10 +1,12 @@
-const express = require('express') ;
-const { errorMiddleware } = require('./middlewares/error.middleware');
-const app = express() ;
+const express = require("express");
+const { errorMiddleware } = require("./middlewares/error.middleware");
 
-app.use( express.json() ) ;
+const app = express();
 
+app.use(express.json());
 
-app.use( errorMiddleware ) ;
+app.use("/api", require("./routes"));
 
-module.exports = { app } ;
+app.use(errorMiddleware);
+
+module.exports = { app };

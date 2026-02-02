@@ -1,34 +1,36 @@
-const mongoose = require('mongoose') ;
+const mongoose = require("mongoose");
 
-
-const bookingsSchema = mongoose.Schema({
-    guest : [{
-        name : { type : String , required : true } ,
-        email : { type : String , required : true } ,
-        note : { type : String }
-    }] ,
-    from : {
-        type : Number ,
-        required : true 
+const bookingsSchema = mongoose.Schema(
+  {
+    guest: [
+      {
+        name: { type: String, required: true },
+        email: { type: String, required: true },
+        note: { type: String },
+      },
+    ],
+    from: {
+      type: Number,
+      required: true,
     },
-    to : {
-        type : Number , 
-        required : true 
+    to: {
+      type: Number,
+      required: true,
     },
-    schedule_id  : { 
-        type : mongoose.Schema.Types.ObjectId ,
-        ref : "Schedule"
+    schedule_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Schedule",
     },
-    meeting_id : {
-        type : String ,
-        required : true 
+    meeting_id: {
+      type: String,
+      required: true,
     },
-    date : {
-        type : Date ,
-        required : true 
-    }
-} , { timestamps : true }  ) ;
+    date: {
+      type: Date,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
-
-
-module.exports = mongoose.model("Bookings" , bookingsSchema ) ;
+module.exports = mongoose.model("Bookings", bookingsSchema);
