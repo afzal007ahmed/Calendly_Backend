@@ -7,12 +7,12 @@ const {
   createSchedule,
   getDetailsofPublicLink
 } = require("../controllers/schedule.controller");
+const authMiddleware = require("../middlewares/auth.middleware");
 
-const auth = require("../middlewares/auth.middleware");
 
-router.get("/schedules", auth, getAllSchedules);
-router.get("/schedules/:scheduleId", auth, getScheduleById);
-router.post("/schedules", auth, createSchedule);
+router.get("/schedules", authMiddleware, getAllSchedules);
+router.get("/schedules/:scheduleId", authMiddleware, getScheduleById);
+router.post("/schedules", authMiddleware, createSchedule);
 router.get("/book/:username/:schedule_id",getDetailsofPublicLink)
 
 module.exports = router;
