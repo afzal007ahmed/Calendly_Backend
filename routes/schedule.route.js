@@ -9,7 +9,6 @@ const {
 } = require("../controllers/schedule.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 
-
 router.get("/schedules", authMiddleware, getAllSchedules);
 router.get("/schedules/:scheduleId", authMiddleware, getScheduleById);
 router.post("/schedules", authMiddleware, createSchedule);

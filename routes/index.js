@@ -8,6 +8,7 @@ const { googleRouter } = require("./google");
 const scheduleRouter = require("./schedule.route");
 const user = require("./user.route");
 const meeting = require("./meeting.route");
+const availabilityRouter = require("./availability.route");
 
 router.use("/auth", authRouter);
 
@@ -20,5 +21,7 @@ router.use(googleAuthMiddleware);
 router.use("/", scheduleRouter);
 
 router.use("/meetings", meeting);
+
+router.use("/availability", availabilityRouter);
 
 module.exports = router;
