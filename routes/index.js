@@ -10,15 +10,11 @@ const availabilityRouter = require('./availability.route')
 
 router.use("/auth", authRouter);
 
-<<<<<<< HEAD
-router.use("/schedules", scheduleRouter);
-=======
 router.use("/google", googleRouter);
 
 router.use(googleAuthMiddleware);
 
 router.use("/", scheduleRouter);
->>>>>>> 84f390dcbb2b14823c49c653741156608193c651
 
 router.use("/meetings", require("./meeting.route"));
 
