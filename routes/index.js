@@ -16,12 +16,12 @@ router.use("/google", googleRouter);
 
 router.use("/user", user);
 
-router.use(googleAuthMiddleware);
-
-router.use("/", scheduleRouter);
-
 router.use("/meetings", meeting);
 
 router.use("/availability", availabilityRouter);
+
+router.use(googleAuthMiddleware);
+
+router.use("/", scheduleRouter);
 
 module.exports = router;
