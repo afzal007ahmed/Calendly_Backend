@@ -1,13 +1,5 @@
 const Meeting = require("../models/meetings");
 
-const getBookingStartDateTime = (booking) => {
-  const date = new Date(booking.date);
-  const hours = Math.floor(booking.from / 60);
-  const minutes = booking.from % 60;
-  date.setHours(hours, minutes, 0, 0);
-  return date;
-};
-
 const getBookingEndDateTime = (booking) => {
   const date = new Date(booking.date);
   const hours = Math.floor(booking.to / 60);
@@ -28,7 +20,7 @@ exports.getMeetings = async (req, res, next) => {
     }
 
     const now = new Date();
-    console.log(req);
+
     const hostId = req.user.id;
 
     const meetings = await Meeting.find().populate({
