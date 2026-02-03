@@ -20,7 +20,7 @@ const authMiddleware = (req, res, next) => {
     next();
   } catch (err) {
     res.status(401).send({
-      code: err.code || "OTHER",
+      code: err.code || "UNAUTHORIZED",
       message: err.message,
     });
   }

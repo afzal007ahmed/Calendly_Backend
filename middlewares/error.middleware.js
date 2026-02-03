@@ -12,4 +12,4 @@ const errorMiddleware = (err, _req, res, _next) => {
   });
 };
 
-module.exports = errorMiddleware;
+module.exports = {errorMiddleware};
