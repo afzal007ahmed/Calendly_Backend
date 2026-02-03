@@ -2,13 +2,14 @@ const { config } = require("../config/config");
 const axios = require("axios");
 const users = require("../models/users");
 const { jwtDecode } = require("jwt-decode");
+const jwt = require('jsonwebtoken')
 
 const googleController = {
-  auth: async (req, res, next) => {
+  auth: async (_req, res, next) => {
     try {
       const params = new URLSearchParams({
         client_id: config.google.client_id,
-        redirect_uri: config.google.redirect_uri,
+        redirect_uri: config.google.redirect_uri_login,
         response_type: "code",
         scope: [
           "openid",
@@ -38,7 +39,7 @@ const googleController = {
         new URLSearchParams({
           client_id: config.google.client_id,
           client_secret: config.google.client_secret,
-          redirect_uri: config.google.redirect_uri,
+          redirect_uri: config.google.redirect_uri_login,
           grant_type: "authorization_code",
           code: code,
         }),
@@ -57,27 +58,33 @@ const googleController = {
       const { email, name } = jwtDecode(id_token);
 
       const user = await users.findOne({ email: email });
-
+      let user_id ;
       if (!user) {
-        await users.create({
+       const {_id} =  await users.create({
           name: name,
           email: email,
           access_token: access_token,
           refresh_token: refresh_token,
         });
+        user_id = _id ;
       } else {
+        const update = {};
+        user_id = user._id ;
+        if (access_token) {
+          update.access_token = access_token;
+        }
+        if (refresh_token) {
+          update.refresh_token = refresh_token;
+        }
         await users.updateOne(
           { email: email },
           {
-            $set: { access_token: access_token, refresh_token: refresh_token },
+            $set: update,
           },
         );
       }
-
-      res.status(200).send({
-        success: true,
-        error: null,
-      });
+      const token = jwt.sign({ id : user_id } , config.jwt.secret) ;
+      res.redirect(config.frontend.redirect_url + `?token=${token}`);
     } catch (error) {
       next(error);
     }
@@ -86,7 +93,7 @@ const googleController = {
     try {
       const params = new URLSearchParams({
         client_id: config.google.client_id,
-        redirect_uri: config.google.redirect_uri,
+        redirect_uri: config.google.redirect_uri_connect,
         response_type: "code",
         scope: [
           "openid",
@@ -116,7 +123,7 @@ const googleController = {
         new URLSearchParams({
           client_id: config.google.client_id,
           client_secret: config.google.client_secret,
-          redirect_uri: config.google.redirect_uri,
+          redirect_uri: config.google.redirect_uri_connect,
           grant_type: "authorization_code",
           code: code,
         }),
@@ -132,19 +139,14 @@ const googleController = {
         throw err;
       }
 
-      const { email, name } = jwtDecode(id_token);
-
       await users.updateOne(
-        { _id : req.user.id },
+        { _id: req.user.id },
         {
           $set: { access_token: access_token, refresh_token: refresh_token },
         },
       );
 
-      res.status(200).send({
-        success: true,
-        error: null,
-      });
+      res.redirect(config.frontend.root);
     } catch (error) {
       next(error);
     }

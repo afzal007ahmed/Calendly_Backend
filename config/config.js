@@ -13,10 +13,15 @@ const config = {
   },
   google : {
     client_id : process.env.GOOGLE_CILENT_ID,
-    redirect_uri : process.env.REDIRECT_URI,
+    redirect_uri_login : process.env.LOGIN_REDIRECT_URI,
     auth_url : process.env.GOOGLE_AUTH_URL ,
     token_url : process.env.TOKEN_URL,
-    client_secret : process.env.GOOGLE_CLIENT_SECRET
+    client_secret : process.env.GOOGLE_CLIENT_SECRET,
+    redirect_uri_connect : process.env.CONNECT_REDIRECT_URI
+  },
+  frontend : {
+    root : process.env.REDIRECT_FRONT_END_ROOT,
+    redirect_url : process.env.REDIRECT_FRONT_END_URL
   }
 };
 

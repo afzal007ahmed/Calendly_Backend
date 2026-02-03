@@ -7,11 +7,11 @@ const { authRouter } = require("./auth");
 const { googleRouter } = require("./google");
 const scheduleRouter = require("./schedule.route");
 
+router.use("/auth", authRouter);
+
 router.use("/google", googleRouter);
 
 router.use(googleAuthMiddleware);
-
-router.use("/auth", authRouter);
 
 router.use("/", scheduleRouter);
 
