@@ -22,6 +22,9 @@ const config = {
   frontend : {
     root : process.env.REDIRECT_FRONT_END_ROOT,
     redirect_url : process.env.REDIRECT_FRONT_END_URL
+  },
+  cors : {
+    origin : process.env.CORS_ORIGIN
   }
 };
 
