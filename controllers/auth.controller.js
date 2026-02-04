@@ -1,6 +1,6 @@
 const users = require("../models/users");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken") ;
+const jwt = require("jsonwebtoken");
 const { validate } = require("../utils/validate");
 const { config } = require("../config/config");
 
@@ -33,15 +33,22 @@ const authController = {
         err.statusCode = 404;
         err.code = "USER_NOT_FOUND";
         throw err;
+      } else if (!user.password) {
+        err.message = "User password not set";
+        err.statusCode = 403;
+        err.code = "USER_PASSWORD_MISSING";
+        throw err ;
       } else if (!(await bcrypt.compare(req.body.password, user.password))) {
         err.message = "password mismatch";
         err.statusCode = 401;
         err.code = "PASSWORD_MISMATCH";
         throw err;
       }
-      const token = jwt.sign({ id : user._id } , config.jwt.secret , { expiresIn : 60*60}) ;
+      const token = jwt.sign({ id: user._id }, config.jwt.secret, {
+        expiresIn: 60 * 60,
+      });
       res.status(200).send({
-        token : token ,
+        token: token,
         success: true,
         error: null,
       });
