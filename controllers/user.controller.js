@@ -8,7 +8,7 @@ exports.getUserIdAndName = async (req, res, next) => {
   try {
     const userId = req.user.id;
 
-    const user = await User.findById(userId).select("_id name");
+    const user = await User.findById(userId).select("_id name email");
 
     if (!user) {
       return res.status(404).json({
