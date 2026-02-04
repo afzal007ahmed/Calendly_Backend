@@ -11,6 +11,6 @@ router.use(authMiddleware);
 
 router.get("/", getUserIdAndName);
 
-router.patch("/name", updateUserName);
+router.put("/name", updateUserName);
 
 module.exports = router;
