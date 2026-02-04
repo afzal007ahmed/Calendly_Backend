@@ -40,45 +40,26 @@ const getAvailabilityforUser = async (req, res, next) => {
 
 const updateAvailability = async (req, res, next) => {
   try {
-    const userId = req.user.id;            
-    const { day, from, to } = req.body;
+    const userId = req.user.id;
+    const allDays = req.body; 
 
-    if (!day || from == null || to == null) {
-      const err = new Error("day, from and to are required");
-      err.statusCode = 400;
-      err.code = "INVALID_INPUT";
-      throw err;
-    }
+    const updates = Object.keys(allDays).map(day => {
+      const slot = allDays[day]?.[0];
+      if (!slot) return null;
+      return Availability.findOneAndUpdate(
+        { user_id: userId, day },
+        { $set: { from: slot.from, to: slot.to } },
+        { upsert: true, new: true }
+      );
+    }).filter(Boolean);
 
-    const updatedAvailability = await Availability.findOneAndUpdate(
-      {
-        user_id: userId,
-        day: day
-      },
-      {
-        $set: {
-          from: Number(from),
-          to: Number(to)
-        }
-      },
-      {
-        new: true,
-        upsert: true 
-      }
-    ).select("day from to -_id");
+    const results = await Promise.all(updates);
 
-    res.status(200).json({
-      success: true,
-      data: updatedAvailability
-    });
-
+    res.status(200).json({ success: true, data: results });
   } catch (err) {
-    err.statusCode = err.statusCode || 500;
-    err.code = err.code || "ERROR_UPDATING_AVAILABILITY";
     next(err);
   }
 };
-
 
 module.exports = {
     getAvailabilityforUser,
