@@ -1,12 +1,20 @@
 const express = require('express') ;
+const cors = require('cors')
 const { errorMiddleware } = require('./middlewares/error.middleware');
-const { Router } = require('./routes/index');
 const app = express() ;
 
-app.use( express.json() ) ;
+const router = require("./routes"); 
+const { config } = require('./config/config');
 
-app.use('/' , Router) ;
+app.use(express.json());
+app.use(cors({
+    origin : config.cors.origin ,
+    methods : [ "GET" , "POST" , "PUT" , "DELETE"] 
+ }))
 
-app.use( errorMiddleware ) ;
 
-module.exports = { app } ;
+app.use("/", router);
+
+app.use(errorMiddleware);
+
+module.exports = { app };

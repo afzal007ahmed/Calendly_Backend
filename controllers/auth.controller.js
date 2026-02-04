@@ -8,6 +8,13 @@ const authController = {
   register: async (req, res, next) => {
     try {
       validate(req, "register");
+      const user = await users.findOne({ email : req.body.email} ) ;
+      if( user ) {
+        const err = new Error("User already exists.") ;
+        err.statusCode = 409;
+        err.code = "USER_DUPLICATE"
+        throw err ;
+      }
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
       await users.create({
         name: req.body.name,
@@ -58,4 +65,4 @@ const authController = {
   },
 };
 
-module.exports = { authController };
+module.exports = authController ;
