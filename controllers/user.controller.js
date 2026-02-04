@@ -50,7 +50,7 @@ exports.updateUserName = async (req, res, next) => {
       userId,
       { name },
       { new: true }
-    ).select("_id name");
+    ).select("_id name email");
 
     if (!updatedUser) {
       return res.status(404).json({
@@ -65,6 +65,7 @@ exports.updateUserName = async (req, res, next) => {
       data: {
         id: updatedUser._id,
         name: updatedUser.name,
+        email : updatedUser.email
       },
     });
   } catch (err) {
