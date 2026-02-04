@@ -28,6 +28,10 @@ const googleController = {
   loginCallback: async (req, res, next) => {
     try {
       const code = req.query.code;
+      const error = req.query.error ;
+      if( error ) {
+        return res.redirect(config.frontend.root + 'login');
+      } 
       const err = new Error();
       if (!code) {
         err.message = "Authorization code is missing.";
