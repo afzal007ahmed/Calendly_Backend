@@ -22,6 +22,7 @@ exports.getUserIdAndName = async (req, res, next) => {
       data: {
         id: user._id,
         name: user.name,
+        email : user.email
       },
     });
   } catch (err) {
