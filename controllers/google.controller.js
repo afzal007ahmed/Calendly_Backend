@@ -34,9 +34,10 @@ const googleController = {
       }
       const err = new Error();
       if (!code) {
-        err.message = "Authorization code is missing.";
-        err.code = "AUTH_CODE_MISSING";
-        throw err;
+        const params = new URLSearchParams({
+          message: "Google login failed. Please try again",
+        }).toString();
+        return res.redirect(config.frontend.redirect_login_url + "?" + params);
       }
       const tokenRes = await axios.post(
         config.google.token_url,
@@ -51,14 +52,15 @@ const googleController = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         },
       );
+
       const { access_token, refresh_token, scope, id_token } = tokenRes.data;
       if (!scope.includes("https://www.googleapis.com/auth/calendar")) {
-        err.message = "Need permission for calender.";
-        err.code = "CALANDER_PERMISSION_MISSING";
-        err.statusCode = 403;
-        throw err;
+        const params = new URLSearchParams({
+          message:
+            "Please allow access for calender events while login from google",
+        }).toString();
+        return res.redirect(config.frontend.redirect_login_url + "?" + params);
       }
-
       const { email, name } = jwtDecode(id_token);
 
       const user = await users.findOne({ email: email });
@@ -95,6 +97,15 @@ const googleController = {
   },
   authConnect: async (req, res, next) => {
     try {
+      const token = req.query.token;
+      if (!token) {
+        return res.redirect(config.frontend.redirect_login_url);
+      }
+
+      req.user = jwt.verify(token, config.jwt.secret);
+      const state = jwt.sign({ id: req.user.id }, config.jwt.secret, {
+        expiresIn: "5m",
+      });
       const params = new URLSearchParams({
         client_id: config.google.client_id,
         redirect_uri: config.google.redirect_uri_connect,
@@ -107,6 +118,7 @@ const googleController = {
         ].join(" "),
         access_type: "offline",
         prompt: "consent",
+        state,
       });
       res.redirect(config.google.auth_url + params);
     } catch (error) {
@@ -116,11 +128,8 @@ const googleController = {
   connectCallback: async (req, res, next) => {
     try {
       const code = req.query.code;
-      const err = new Error();
       if (!code) {
-        err.message = "Authorization code is missing.";
-        err.code = "AUTH_CODE_MISSING";
-        throw err;
+        return res.redirect(config.frontend.root);
       }
       const tokenRes = await axios.post(
         config.google.token_url,
@@ -135,20 +144,24 @@ const googleController = {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         },
       );
+      req.user = jwt.verify(req.query.state, config.jwt.secret);
       const { access_token, refresh_token, scope, id_token } = tokenRes.data;
       if (!scope.includes("https://www.googleapis.com/auth/calendar")) {
-        err.message = "Need permission for calender.";
-        err.code = "CALANDER_PERMISSION_MISSING";
-        err.statusCode = 403;
-        throw err;
+        const params = new URLSearchParams({
+          message:
+            "Please allow access for calender events while login from google",
+        }).toString();
+        return res.redirect(config.frontend.root + "?" + params);
       }
       const userDetails = jwtDecode(id_token);
-      const user = await users.findOne({ email: userDetails.email });
-      if (!user) {
-        err.message = "Please add same gmail account from which you are logged in.";
-        err.code = "GMAIL_MISMATCH";
-        err.statusCode = 403;
-        throw err;
+      const gotUser = await users.findOne({ email: userDetails.email });
+      const currUser = await users.findOne({ _id: req.user.id });
+      if (!gotUser || gotUser.email !== currUser.email) {
+        const params = new URLSearchParams({
+          message:
+            "Please add same gmail account from which you are logged in",
+        }).toString();
+        return res.redirect(config.frontend.root + "?" + params);
       }
 
       await users.updateOne(

@@ -1,6 +1,3 @@
-const {
-  googleAuthMiddleware,
-} = require("../middlewares/googleAuth.middleware");
 const express = require("express");
 const router = express.Router();
 const { authRouter } = require("./auth");
@@ -22,8 +19,6 @@ router.use("/user", user);
 router.use("/meetings", meeting);
 
 router.use("/availability", availabilityRouter);
-
-router.use(googleAuthMiddleware);
 
 router.use("/schedules", scheduleRouter);
 

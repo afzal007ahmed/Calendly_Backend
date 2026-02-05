@@ -21,7 +21,8 @@ const config = {
   },
   frontend : {
     root : process.env.REDIRECT_FRONT_END_ROOT,
-    redirect_url : process.env.REDIRECT_FRONT_END_URL
+    redirect_url : process.env.REDIRECT_FRONT_END_URL,
+    redirect_login_url : process.env.REDIRECT_FRONT_END_LOGIN
   },
   cors : {
     origin : process.env.CORS_ORIGIN
