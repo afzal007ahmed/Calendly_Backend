@@ -18,7 +18,7 @@ const getAllSchedules = async (req, res) => {
       host_id: userObjectId
     }).populate({
       path: "host_id",
-      select: "name email"
+      select: "name email host_id"
     });
 
     const availability = await Availability.find({
@@ -31,7 +31,7 @@ const getAllSchedules = async (req, res) => {
       duration: schedule.duration,
       type_of_meeting: schedule.type_of_meeting,
       availability,
-      public_link: `/book/${schedule.host_id.name}/${schedule._id}`
+      public_link: `/book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`
     }));
 
     res.status(200).json({
@@ -106,19 +106,22 @@ const getScheduleById = async (req, res) => {
 };
 
 // check : remove if unused
-const getDetailsofPublicLink = async (req, res) => {
+const getDetailsofPublicLink = async (req, res, next) => {
   try {
-    const { username, schedule_id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(schedule_id)) {
+    const { username, userId, schedule_id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(userId) ||
+        !mongoose.Types.ObjectId.isValid(schedule_id)) {
       return res.status(400).json({
-        code: "INVALID_SCHEDULE_ID",
-        message: "Invalid schedule id",
+        code: "INVALID_ID",
+        message: "Invalid user or schedule id",
       });
     }
 
-    const user = await Users.findOne({ name: username }).select(
-      "_id name email"
-    );
+    const user = await Users.findOne({
+      _id: userId,
+      name: username
+    }).select("_id name email");
 
     if (!user) {
       return res.status(404).json({
