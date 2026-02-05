@@ -23,7 +23,7 @@ router.use("/meetings", meeting);
 
 router.use("/availability", availabilityRouter);
 
-// router.use(googleAuthMiddleware);
+router.use(googleAuthMiddleware);
 
 router.use("/schedules", scheduleRouter);
 
