@@ -2,7 +2,7 @@ const { config } = require("../config/config");
 const axios = require("axios");
 const users = require("../models/users");
 const { jwtDecode } = require("jwt-decode");
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken");
 
 const googleController = {
   auth: async (_req, res, next) => {
@@ -28,10 +28,10 @@ const googleController = {
   loginCallback: async (req, res, next) => {
     try {
       const code = req.query.code;
-      const error = req.query.error ;
-      if( error ) {
-        return res.redirect(config.frontend.root + 'login');
-      } 
+      const error = req.query.error;
+      if (error) {
+        return res.redirect(config.frontend.root + "login");
+      }
       const err = new Error();
       if (!code) {
         err.message = "Authorization code is missing.";
@@ -62,18 +62,18 @@ const googleController = {
       const { email, name } = jwtDecode(id_token);
 
       const user = await users.findOne({ email: email });
-      let user_id ;
+      let user_id;
       if (!user) {
-       const {_id} =  await users.create({
+        const { _id } = await users.create({
           name: name,
           email: email,
           access_token: access_token,
           refresh_token: refresh_token,
         });
-        user_id = _id ;
+        user_id = _id;
       } else {
         const update = {};
-        user_id = user._id ;
+        user_id = user._id;
         if (access_token) {
           update.access_token = access_token;
         }
@@ -87,7 +87,7 @@ const googleController = {
           },
         );
       }
-      const token = jwt.sign({ id : user_id } , config.jwt.secret) ;
+      const token = jwt.sign({ id: user_id }, config.jwt.secret);
       res.redirect(config.frontend.redirect_url + `?token=${token}`);
     } catch (error) {
       next(error);
@@ -139,6 +139,14 @@ const googleController = {
       if (!scope.includes("https://www.googleapis.com/auth/calendar")) {
         err.message = "Need permission for calender.";
         err.code = "CALANDER_PERMISSION_MISSING";
+        err.statusCode = 403;
+        throw err;
+      }
+      const userDetails = jwtDecode(id_token);
+      const user = await users.findOne({ email: userDetails.email });
+      if (!user) {
+        err.message = "Please add same gmail account from which you are logged in.";
+        err.code = "GMAIL_MISMATCH";
         err.statusCode = 403;
         throw err;
       }
