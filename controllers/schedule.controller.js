@@ -32,7 +32,7 @@ const getAllSchedules = async (req, res) => {
       duration: schedule.duration,
       type_of_meeting: schedule.type_of_meeting,
       availability,
-      public_link: `${config.frontend.root}book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`
+      public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`
     }));
 
     res.status(200).json({
@@ -91,7 +91,7 @@ const getScheduleById = async (req, res) => {
       duration: schedule.duration,
       type_of_meeting: schedule.type_of_meeting,
       availability,
-      public_link: `${config.frontend.root}book/${schedule.host_id.name}/${schedule._id}`
+      public_link: `book/${schedule.host_id.name}/${schedule._id}`
     };
     
     res.status(200).json({
