@@ -34,12 +34,14 @@ exports.getMeetings = async (req, res, next) => {
       const end = getBookingEndDateTime(m.booking_id);
 
       if (type === "upcoming") {
-        return m.status === false && end > now;
+        return end > now;
       }
 
       if (type === "past") {
-        return m.status === true || end <= now;
+        return end <= now;
       }
+
+      return false;
     });
 
     return res.status(200).json({
