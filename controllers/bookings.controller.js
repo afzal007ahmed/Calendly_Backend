@@ -19,7 +19,6 @@ const bookingsController = {
         user._id,
       );
       const baseDate = new Date(req.body.date);
-      baseDate.setHours(0, 0, 0, 0);
       const from = new Date(baseDate);
       const to = new Date(baseDate);
 
