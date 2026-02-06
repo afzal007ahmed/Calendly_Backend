@@ -4,11 +4,14 @@ const { authRouter } = require("./auth");
 const { googleRouter } = require("./google");
 const publicLink = require("./public.route");
 const scheduleRouter = require("./schedule.route");
+const healthRouter = require('./health.route')
 const user = require("./user.route");
 const meeting = require("./meeting.route");
 const availabilityRouter = require("./availability.route");
 
 router.use('/book', publicLink)
+
+router.use('/health', healthRouter)
 
 router.use("/auth", authRouter);
 
