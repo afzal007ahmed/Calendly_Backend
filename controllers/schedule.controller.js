@@ -1,46 +1,46 @@
 const mongoose = require("mongoose");
 const Availability = require("../models/availability");
-const Users = require('../models/users')
-const Schedule = require('../models/schedule');
+const Users = require("../models/users");
+const Schedule = require("../models/schedule");
 const { config } = require("../config/config");
 
-const getAllSchedules = async (req, res) => {
+const getAllSchedules = async (req, res, next) => {
   try {
     const userId = req.user?.id;
-    if(!userId){
+
+    if (!userId) {
       return res.status(400).json({
-          code: "INVALID_USER_ID",
-          message: "Valid userId is required"
+        code: "INVALID_USER_ID",
+        message: "Valid userId is required",
       });
     }
-    const userObjectId = new mongoose.Types.ObjectId(userId);
 
     const schedules = await Schedule.find({
-      host_id: userObjectId
+      host_id: userId,
+      isDeleted: false,
     }).populate({
       path: "host_id",
-      select: "name email host_id"
+      select: "name email",
     });
 
     const availability = await Availability.find({
-      user_id: userObjectId
+      user_id: userId,
     }).select("day from to -_id");
 
     const response = schedules.map((schedule) => ({
       _id: schedule._id,
       meeting_name: schedule.subject,
       duration: schedule.duration,
-      type_of_meeting: schedule.type_of_meeting,
+      type_of_meeting: schedule.type_of_meeting==="one" || schedule.type_of_meeting==="group" ? schedule.type_of_meeting : false,
       availability,
-      public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`
-    }));
+      public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`,
+    })).filter(b => b.type_of_meeting);
 
     res.status(200).json({
       success: true,
       count: response.length,
-      data: response
+      data: response,
     });
-
   } catch (err) {
     err.statusCode = 500;
     err.code = "ERROR_GETTING_SCHEDULES";
@@ -48,10 +48,10 @@ const getAllSchedules = async (req, res) => {
   }
 };
 
-const getScheduleById = async (req, res) => {
+const getScheduleById = async (req, res, next) => {
   try {
     const { scheduleId } = req.params;
-    const userId = req.user?.id; 
+    const userId = req.user?.id;
 
     if (
       !mongoose.Types.ObjectId.isValid(scheduleId) ||
@@ -59,46 +59,41 @@ const getScheduleById = async (req, res) => {
     ) {
       return res.status(400).json({
         code: "INVALID_ID",
-        message: "Invalid scheduleId or userId"
+        message: "Invalid scheduleId or userId",
       });
     }
 
-    const scheduleObjectId = new mongoose.Types.ObjectId(scheduleId);
-    const userObjectId = new mongoose.Types.ObjectId(userId);
-
     const schedule = await Schedule.findOne({
-      _id: scheduleObjectId,
-      host_id: userObjectId
+      _id: scheduleId,
+      host_id: userId,
+      isDeleted: false,
     }).populate({
       path: "host_id",
-      select: "name email"
+      select: "name email",
     });
 
     if (!schedule) {
       return res.status(404).json({
         code: "SCHEDULE_NOT_FOUND",
-        message: "Schedule not found"
+        message: "Schedule not found",
       });
     }
 
     const availability = await Availability.find({
-      user_id: userObjectId
+      user_id: userId,
     }).select("day from to -_id");
 
-    const response = {
-      _id: schedule._id,
-      meeting_name: schedule.subject,
-      duration: schedule.duration,
-      type_of_meeting: schedule.type_of_meeting,
-      availability,
-      public_link: `book/${schedule.host_id.name}/${schedule._id}`
-    };
-    
     res.status(200).json({
       success: true,
-      data: response
+      data: {
+        _id: schedule._id,
+        meeting_name: schedule.subject,
+        duration: schedule.duration,
+        type_of_meeting: schedule.type_of_meeting,
+        availability,
+        public_link: `book/${schedule.host_id.name}/${schedule._id}`,
+      },
     });
-
   } catch (err) {
     err.statusCode = 500;
     err.code = "ERROR_GETTING_SCHEDULES";
@@ -106,13 +101,14 @@ const getScheduleById = async (req, res) => {
   }
 };
 
-// check : remove if unused
 const getDetailsofPublicLink = async (req, res, next) => {
   try {
     const { username, userId, schedule_id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(userId) ||
-        !mongoose.Types.ObjectId.isValid(schedule_id)) {
+    if (
+      !mongoose.Types.ObjectId.isValid(userId) ||
+      !mongoose.Types.ObjectId.isValid(schedule_id)
+    ) {
       return res.status(400).json({
         code: "INVALID_ID",
         message: "Invalid user or schedule id",
@@ -121,7 +117,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
 
     const user = await Users.findOne({
       _id: userId,
-      name: username
+      name: username,
     }).select("_id name email");
 
     if (!user) {
@@ -134,6 +130,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
     const schedule = await Schedule.findOne({
       _id: schedule_id,
       host_id: user._id,
+      isDeleted: false,
     });
 
     if (!schedule) {
@@ -147,7 +144,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
       user_id: user._id,
     }).select("day from to -_id");
 
-    return res.status(200).json({
+    res.status(200).json({
       success: true,
       data: {
         host: {
@@ -170,7 +167,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
   }
 };
 
-const createSchedule = async (req, res) => {
+const createSchedule = async (req, res, next) => {
   try {
     const userId = req.user?.id;
     const { meeting_name, type_of_meeting, duration } = req.body;
@@ -183,13 +180,14 @@ const createSchedule = async (req, res) => {
     }
 
     const schedule = await Schedule.create({
-      host_id: userId,                
+      host_id: userId,
       subject: meeting_name,
-      duration: duration,
-      type_of_meeting: type_of_meeting,
+      duration,
+      type_of_meeting,
+      isDeleted: false,
     });
 
-    return res.status(201).json({
+    res.status(201).json({
       success: true,
       data: schedule,
     });
@@ -200,10 +198,9 @@ const createSchedule = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getAllSchedules,
   getScheduleById,
   getDetailsofPublicLink,
-  createSchedule
-}
+  createSchedule,
+};

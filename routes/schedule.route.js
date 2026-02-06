@@ -10,7 +10,7 @@ const authMiddleware = require("../middlewares/auth.middleware");
 const { googleAuthMiddleware } = require("../middlewares/googleAuth.middleware")
 
 router.use(authMiddleware) ;
-router.use(googleAuthMiddleware)
+// router.use(googleAuthMiddleware)
 
 router.get("/", getAllSchedules);
 router.get("/:scheduleId", getScheduleById);
