@@ -93,3 +93,15 @@ ValidationError: Bookings validation failed: meeting_id: Path `meeting_id` is re
 Error: User already exists.
     at register (/home/afzal/Downloads/Calendly_Backend/controllers/auth.controller.js:13:21)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 23:31:00 [ERROR]: Bookings validation failed: guest.0.name: Path `name` is required.
+ValidationError: Bookings validation failed: guest.0.name: Path `name` is required.
+    at Document.invalidate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3385:32)
+    at Subdocument.invalidate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/types/subdocument.js:227:12)
+    at validatePath (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3160:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async EmbeddedDocument.$__validate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3101:3)
+    at async Promise.all (index 0)
+    at async SchemaDocumentArray.doValidate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/schema/documentArray.js:269:3)
+    at async validatePath (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3152:7)
+    at async Promise.all (index 0)

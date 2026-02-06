@@ -12,7 +12,6 @@ const bookingsController = {
         throw err;
       }
 
-      console.log(user);
       const calender = await googleCalenderClient(
         user.access_token,
         user.refresh_token,
