@@ -54,21 +54,3 @@ exports.getMeetings = async (req, res, next) => {
     next(err);
   }
 };
-
-exports.testFetchMeetings = async (req, res) => {
-  try {
-    const meetings = await Meeting.find();
-
-    return res.status(200).json({
-      success: true,
-      count: meetings.length,
-      data: meetings,
-    });
-  } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: "Failed to fetch meetings",
-      error: err.message,
-    });
-  }
-};

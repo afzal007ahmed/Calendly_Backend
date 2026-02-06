@@ -1,0 +1,581 @@
+openapi: 3.0.3
+info:
+  title: Calendly Backend - API
+  version: "1.0.0"
+  description: |
+    OpenAPI 3.0 specification for the Calendly Backend. Covers authentication,
+    user, schedules, availability, meetings, Google OAuth callbacks, public booking
+    link, and a health endpoint.
+
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        code:
+          type: string
+        message:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "607d1b2f4f1a3b2c4d5e6f7a"
+        name:
+          type: string
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          example: "john@example.com"
+
+    AuthRegisterRequest:
+      type: object
+      required: [name, email, password]
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    AuthLoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+
+    AuthLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        success:
+          type: boolean
+
+    Guest:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        note:
+          type: string
+          nullable: true
+
+    Booking:
+      type: object
+      properties:
+        _id:
+          type: string
+        guest:
+          type: array
+          items:
+            $ref: '#/components/schemas/Guest'
+        from:
+          type: integer
+        to:
+          type: integer
+        schedule_id:
+          type: string
+          nullable: true
+        meeting_id:
+          type: string
+        host_id:
+          type: string
+        date:
+          type: string
+          format: date
+
+    Meeting:
+      type: object
+      properties:
+        _id:
+          type: string
+        booking_id:
+          $ref: '#/components/schemas/Booking'
+        meeting_id:
+          type: string
+        status:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    MeetingsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        type:
+          type: string
+          nullable: true
+        count:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Meeting'
+
+    AvailabilitySlot:
+      type: object
+      properties:
+        from:
+          type: integer
+          description: minutes since midnight
+        to:
+          type: integer
+          description: minutes since midnight
+
+    AvailabilityGroupedResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              $ref: '#/components/schemas/AvailabilitySlot'
+
+    Schedule:
+      type: object
+      properties:
+        _id:
+          type: string
+        duration:
+          type: integer
+        limit:
+          type: integer
+          nullable: true
+        type_of_meeting:
+          type: string
+          enum: [one, group]
+        host_id:
+          $ref: '#/components/schemas/User'
+        subject:
+          type: string
+        isDeleted:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    SchedulesListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        count:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Schedule'
+
+    PublicLinkResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            host:
+              type: object
+              properties:
+                name: { type: string }
+                email: { type: string }
+            schedule:
+              type: object
+              properties:
+                id: { type: string }
+                meeting_name: { type: string }
+                duration: { type: integer }
+                type_of_meeting: { type: string }
+            availability:
+              type: array
+              items:
+                $ref: '#/components/schemas/AvailabilitySlot'
+
+    CreateScheduleRequest:
+      type: object
+      required: [meeting_name, type_of_meeting, duration]
+      properties:
+        meeting_name:
+          type: string
+        type_of_meeting:
+          type: string
+          enum: [one, group]
+        duration:
+          type: integer
+
+    UpdateNameRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+
+paths:
+  /health:
+    get:
+      summary: Health check
+      tags: [Health]
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string }
+                  uptime: { type: number }
+                  timestamp: { type: string, format: date-time }
+
+  /auth/register:
+    post:
+      summary: Register a new user
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthRegisterRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  error: { type: object, nullable: true }
+        '409':
+          description: User already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login:
+    post:
+      summary: Login user and return JWT token
+      tags: [Auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthLoginRequest'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthLoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /google/login/auth:
+    get:
+      summary: Start Google login (redirect)
+      tags: [Google]
+      responses:
+        '302':
+          description: Redirect to Google OAuth consent
+
+  /google/login/callback:
+    get:
+      summary: Callback for Google login
+      tags: [Google]
+      responses:
+        '302':
+          description: Redirect to frontend with token on success
+
+  /google/connect/auth:
+    get:
+      summary: Start Google connect flow for existing user (requires token query param)
+      tags: [Google]
+      parameters:
+        - name: token
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to Google OAuth consent
+
+  /google/connect/callback:
+    get:
+      summary: Callback for Google connect
+      tags: [Google]
+      parameters:
+        - name: code
+          in: query
+          schema:
+            type: string
+      responses:
+        '302':
+          description: Redirect to frontend on success
+
+  /user:
+    get:
+      summary: Get authenticated user's id and name
+      tags: [User]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: User info
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data: { $ref: '#/components/schemas/User' }
+        '404':
+          description: User not found
+
+  /user/name:
+    put:
+      summary: Update username
+      tags: [User]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNameRequest'
+      responses:
+        '200':
+          description: Name updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  message: { type: string }
+                  data: { $ref: '#/components/schemas/User' }
+        '400':
+          description: Name missing or invalid
+
+  /availability:
+    get:
+      summary: Get availability for authenticated user (grouped by day)
+      tags: [Availability]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Grouped availability
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityGroupedResponse'
+    put:
+      summary: Update availability for authenticated user
+      tags: [Availability]
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: Object keyed by day name with array of slots. Example: { "monday": [{"from":540,"to":600}] }
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AvailabilitySlot'
+      responses:
+        '200':
+          description: Updated availability
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data:
+                    type: array
+                    items: { type: object }
+
+  /schedules:
+    get:
+      summary: Get schedules for authenticated host
+      tags: [Schedules]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List of schedules with availability and public links
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulesListResponse'
+    post:
+      summary: Create a new schedule
+      tags: [Schedules]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateScheduleRequest'
+      responses:
+        '201':
+          description: Schedule created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data: { $ref: '#/components/schemas/Schedule' }
+
+  /schedules/{scheduleId}:
+    get:
+      summary: Get schedule by id for authenticated host
+      tags: [Schedules]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: scheduleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Schedule details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  data: { $ref: '#/components/schemas/Schedule' }
+        '404':
+          description: Schedule not found
+
+  /book/{username}/{userId}/{schedule_id}:
+    get:
+      summary: Get public booking link details
+      tags: [Public]
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema: { type: string }
+        - name: userId
+          in: path
+          required: true
+          schema: { type: string }
+        - name: schedule_id
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Public link details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PublicLinkResponse'
+        '404':
+          description: User or schedule not found
+
+  /meetings:
+    get:
+      summary: Get meetings for authenticated host (upcoming or past)
+      tags: [Meetings]
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum: [upcoming, past]
+          description: Return upcoming or past meetings
+      responses:
+        '200':
+          description: A list of meetings matching the query
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MeetingsResponse'
+        '400':
+          description: Invalid query parameter
+
+  /meetings/test:
+    get:
+      summary: Test endpoint to fetch all meetings (for debugging)
+      tags: [Meetings]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Returns all meetings (no filtering)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success: { type: boolean }
+                  count: { type: integer }
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Meeting'
+
+security:
+  - bearerAuth: []
