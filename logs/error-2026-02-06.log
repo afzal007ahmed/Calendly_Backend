@@ -1,0 +1,95 @@
+2026-02-06 13:00:11 [ERROR]: Bookings is not defined
+ReferenceError: Bookings is not defined
+    at getDetailsofPublicLink (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/schedule.controller.js:150:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 13:22:20 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:05 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:11 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 15:27:30 [ERROR]: No access, refresh token, API key or refresh handler callback is set.
+Error: No access, refresh token, API key or refresh handler callback is set.
+    at OAuth2Client.getRequestMetadataAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:346:19)
+    at OAuth2Client.requestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:457:34)
+    at OAuth2Client.request (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:452:25)
+    at createAPIRequestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis-common/build/src/apirequest.js:308:42)
+    at createAPIRequest (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis-common/build/src/apirequest.js:53:16)
+    at Resource$Events.insert (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis/build/src/apis/calendar/v3.js:910:65)
+    at createBooking (/home/afzal/Downloads/Calendly_Backend/controllers/bookings.controller.js:26:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 15:37:12 [ERROR]: No access, refresh token, API key or refresh handler callback is set.
+Error: No access, refresh token, API key or refresh handler callback is set.
+    at OAuth2Client.getRequestMetadataAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:346:19)
+    at OAuth2Client.requestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:457:34)
+    at OAuth2Client.request (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:452:25)
+    at createAPIRequestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis-common/build/src/apirequest.js:308:42)
+    at createAPIRequest (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis-common/build/src/apirequest.js:53:16)
+    at Resource$Events.insert (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis/build/src/apis/calendar/v3.js:910:65)
+    at createBooking (/home/afzal/Downloads/Calendly_Backend/controllers/bookings.controller.js:28:46)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 15:38:21 [ERROR]: Google Calendar API has not been used in project 180168963762 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/calendar-json.googleapis.com/overview?project=180168963762 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+Error: Google Calendar API has not been used in project 180168963762 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/calendar-json.googleapis.com/overview?project=180168963762 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
+    at Gaxios._request (/home/afzal/Downloads/Calendly_Backend/node_modules/gaxios/build/cjs/src/gaxios.js:155:23)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async OAuth2Client.requestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/google-auth-library/build/src/auth/oauth2client.js:463:20)
+    at async createAPIRequestAsync (/home/afzal/Downloads/Calendly_Backend/node_modules/googleapis-common/build/src/apirequest.js:308:25)
+    at async createBooking (/home/afzal/Downloads/Calendly_Backend/controllers/bookings.controller.js:28:24)
+2026-02-06 15:39:15 [ERROR]: Bookings validation failed: date: Path `date` is required., meeting_id: Path `meeting_id` is required.
+ValidationError: Bookings validation failed: date: Path `date` is required., meeting_id: Path `meeting_id` is required.
+    at Document.invalidate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3385:32)
+    at validatePath (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3160:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async model.$__validate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3101:3)
+    at async model.validate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:2672:5)
+    at async model.validateBeforeSave (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/plugins/validateBeforeSave.js:34:7)
+    at async Kareem.execPre (/home/afzal/Downloads/Calendly_Backend/node_modules/kareem/index.js:65:24)
+    at async model.$__save (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/model.js:369:5)
+    at async model.save (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/model.js:609:5)
+2026-02-06 15:41:12 [ERROR]: Bookings validation failed: meeting_id: Path `meeting_id` is required.
+ValidationError: Bookings validation failed: meeting_id: Path `meeting_id` is required.
+    at Document.invalidate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3385:32)
+    at validatePath (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3160:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 2)
+    at async model.$__validate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:3101:3)
+    at async model.validate (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/document.js:2672:5)
+    at async model.validateBeforeSave (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/plugins/validateBeforeSave.js:34:7)
+    at async Kareem.execPre (/home/afzal/Downloads/Calendly_Backend/node_modules/kareem/index.js:65:24)
+    at async model.$__save (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/model.js:369:5)
+    at async model.save (/home/afzal/Downloads/Calendly_Backend/node_modules/mongoose/lib/model.js:609:5)
+2026-02-06 16:48:16 [ERROR]: User already exists.
+Error: User already exists.
+    at register (/home/afzal/Downloads/Calendly_Backend/controllers/auth.controller.js:13:21)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
