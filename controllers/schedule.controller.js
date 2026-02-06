@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Availability = require("../models/availability");
+const Bookings = require("../models/bookings")
 const Users = require("../models/users");
 const Schedule = require("../models/schedule");
 const { config } = require("../config/config");
@@ -147,6 +148,11 @@ const getDetailsofPublicLink = async (req, res, next) => {
       user_id: user._id,
     }).select("day from to -_id");
 
+    const bookings = await Bookings.findOne({
+      host_id: user._id,
+      schedule_id
+    }).select("-_id");
+
     res.status(200).json({
       success: true,
       data: {
@@ -161,6 +167,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
           type_of_meeting: schedule.type_of_meeting,
         },
         availability,
+        bookings
       },
     });
   } catch (err) {

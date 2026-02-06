@@ -115,3 +115,190 @@
 2026-02-06 12:48:53 [INFO]: ::1 - - [06/Feb/2026:07:18:53 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
 2026-02-06 12:48:54 [INFO]: ::1 - - [06/Feb/2026:07:18:54 +0000] "GET /availability HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
 2026-02-06 12:48:55 [INFO]: ::1 - - [06/Feb/2026:07:18:55 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 12:56:17 [INFO]: ::1 - - [06/Feb/2026:07:26:17 +0000] "GET /meetings?type=upcoming HTTP/1.1" 401 47 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 12:56:17 [INFO]: ::1 - - [06/Feb/2026:07:26:17 +0000] "GET /meetings?type=past HTTP/1.1" 401 47 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 12:56:30 [INFO]: ::1 - - [06/Feb/2026:07:26:30 +0000] "POST /auth/login HTTP/1.1" 200 211 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 12:56:30 [INFO]: ::1 - - [06/Feb/2026:07:26:30 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 12:56:30 [INFO]: ::1 - - [06/Feb/2026:07:26:30 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:00:11 [ERROR]: Bookings is not defined
+ReferenceError: Bookings is not defined
+    at getDetailsofPublicLink (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/schedule.controller.js:150:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 13:00:11 [INFO]: ::1 - - [06/Feb/2026:07:30:11 +0000] "GET /book/user5/6980565d47e965ecdaf47031/698590983e7dc80c81f50dfe HTTP/1.1" 500 87 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:01:12 [INFO]: ::1 - - [06/Feb/2026:07:31:12 +0000] "GET /book/user5/6980565d47e965ecdaf47031/698590983e7dc80c81f50dfe HTTP/1.1" 200 452 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:02:25 [INFO]: ::1 - - [06/Feb/2026:07:32:25 +0000] "GET /book/user5/6980565d47e965ecdaf47031/698590983e7dc80c81f50dfe HTTP/1.1" 200 454 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:12:39 [INFO]: ::1 - - [06/Feb/2026:07:42:39 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:14:09 [INFO]: ::1 - - [06/Feb/2026:07:44:09 +0000] "GET /book/user5/6980565d47e965ecdaf47031/69857c9b361cb877b857dac3 HTTP/1.1" 404 60 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:14:35 [INFO]: ::1 - - [06/Feb/2026:07:44:35 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:16:12 [INFO]: ::1 - - [06/Feb/2026:07:46:12 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:16:36 [INFO]: ::1 - - [06/Feb/2026:07:46:36 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:16:42 [INFO]: ::1 - - [06/Feb/2026:07:46:42 +0000] "GET /schedules HTTP/1.1" 401 47 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:16:45 [INFO]: ::1 - - [06/Feb/2026:07:46:45 +0000] "POST /auth/login HTTP/1.1" 200 211 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:16:56 [INFO]: ::1 - - [06/Feb/2026:07:46:56 +0000] "GET /schedules HTTP/1.1" 200 4751 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:17:04 [INFO]: ::1 - - [06/Feb/2026:07:47:04 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:17:10 [INFO]: ::1 - - [06/Feb/2026:07:47:10 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:17:20 [INFO]: ::1 - - [06/Feb/2026:07:47:20 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:25 [INFO]: ::1 - - [06/Feb/2026:07:47:25 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:27 [INFO]: ::1 - - [06/Feb/2026:07:47:27 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:27 [INFO]: ::1 - - [06/Feb/2026:07:47:27 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:27 [INFO]: ::1 - - [06/Feb/2026:07:47:27 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:28 [INFO]: ::1 - - [06/Feb/2026:07:47:28 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:28 [INFO]: ::1 - - [06/Feb/2026:07:47:28 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:28 [INFO]: ::1 - - [06/Feb/2026:07:47:28 +0000] "GET /availability HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:29 [INFO]: ::1 - - [06/Feb/2026:07:47:29 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:29 [INFO]: ::1 - - [06/Feb/2026:07:47:29 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:30 [INFO]: ::1 - - [06/Feb/2026:07:47:30 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:30 [INFO]: ::1 - - [06/Feb/2026:07:47:30 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:30 [INFO]: ::1 - - [06/Feb/2026:07:47:30 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:30 [INFO]: ::1 - - [06/Feb/2026:07:47:30 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:30 [INFO]: ::1 - - [06/Feb/2026:07:47:30 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:31 [INFO]: ::1 - - [06/Feb/2026:07:47:31 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:31 [INFO]: ::1 - - [06/Feb/2026:07:47:31 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:31 [INFO]: ::1 - - [06/Feb/2026:07:47:31 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:31 [INFO]: ::1 - - [06/Feb/2026:07:47:31 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:31 [INFO]: ::1 - - [06/Feb/2026:07:47:31 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:32 [INFO]: ::1 - - [06/Feb/2026:07:47:32 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:32 [INFO]: ::1 - - [06/Feb/2026:07:47:32 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:32 [INFO]: ::1 - - [06/Feb/2026:07:47:32 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:32 [INFO]: ::1 - - [06/Feb/2026:07:47:32 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:17:32 [INFO]: ::1 - - [06/Feb/2026:07:47:32 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:42 [INFO]: ::1 - - [06/Feb/2026:07:49:42 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:42 [INFO]: ::1 - - [06/Feb/2026:07:49:42 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:42 [INFO]: ::1 - - [06/Feb/2026:07:49:42 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:42 [INFO]: ::1 - - [06/Feb/2026:07:49:42 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:42 [INFO]: ::1 - - [06/Feb/2026:07:49:42 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:43 [INFO]: ::1 - - [06/Feb/2026:07:49:43 +0000] "GET /availability HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:44 [INFO]: ::1 - - [06/Feb/2026:07:49:44 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:44 [INFO]: ::1 - - [06/Feb/2026:07:49:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:44 [INFO]: ::1 - - [06/Feb/2026:07:49:44 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:46 [INFO]: ::1 - - [06/Feb/2026:07:49:46 +0000] "GET /availability HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:46 [INFO]: ::1 - - [06/Feb/2026:07:49:46 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:46 [INFO]: ::1 - - [06/Feb/2026:07:49:46 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:19:47 [INFO]: ::1 - - [06/Feb/2026:07:49:47 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:22:12 [INFO]: ::1 - - [06/Feb/2026:07:52:12 +0000] "GET /schedules HTTP/1.1" 200 4751 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:22:20 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:22:20 [INFO]: ::1 - - [06/Feb/2026:07:52:20 +0000] "GET /meetings HTTP/1.1" 400 89 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:22:59 [INFO]: ::1 - - [06/Feb/2026:07:52:59 +0000] "GET /meetings&type=false HTTP/1.1" 404 162 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:23:05 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:05 [INFO]: ::1 - - [06/Feb/2026:07:53:05 +0000] "GET /meetings?type=false HTTP/1.1" 400 89 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:23:11 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:11 [INFO]: ::1 - - [06/Feb/2026:07:53:11 +0000] "GET /meetings?past=false HTTP/1.1" 400 89 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:23:52 [INFO]: ::1 - - [06/Feb/2026:07:53:52 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:23:57 [INFO]: ::1 - - [06/Feb/2026:07:53:57 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:27:34 [INFO]: ::1 - - [06/Feb/2026:07:57:34 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:34 [INFO]: ::1 - - [06/Feb/2026:07:57:34 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:35 [INFO]: ::1 - - [06/Feb/2026:07:57:35 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:35 [INFO]: ::1 - - [06/Feb/2026:07:57:35 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:35 [INFO]: ::1 - - [06/Feb/2026:07:57:35 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:35 [INFO]: ::1 - - [06/Feb/2026:07:57:35 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:35 [INFO]: ::1 - - [06/Feb/2026:07:57:35 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:27:42 [INFO]: ::1 - - [06/Feb/2026:07:57:42 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:27:44 [INFO]: ::1 - - [06/Feb/2026:07:57:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:27:56 [INFO]: ::1 - - [06/Feb/2026:07:57:56 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:28:45 [INFO]: ::1 - - [06/Feb/2026:07:58:45 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:28:47 [INFO]: ::1 - - [06/Feb/2026:07:58:47 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:30:26 [INFO]: ::1 - - [06/Feb/2026:08:00:26 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:30:33 [INFO]: ::1 - - [06/Feb/2026:08:00:33 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:32:14 [INFO]: ::1 - - [06/Feb/2026:08:02:14 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:14 [INFO]: ::1 - - [06/Feb/2026:08:02:14 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:14 [INFO]: ::1 - - [06/Feb/2026:08:02:14 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:14 [INFO]: ::1 - - [06/Feb/2026:08:02:14 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:14 [INFO]: ::1 - - [06/Feb/2026:08:02:14 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:15 [INFO]: ::1 - - [06/Feb/2026:08:02:15 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:15 [INFO]: ::1 - - [06/Feb/2026:08:02:15 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:15 [INFO]: ::1 - - [06/Feb/2026:08:02:15 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:15 [INFO]: ::1 - - [06/Feb/2026:08:02:15 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:15 [INFO]: ::1 - - [06/Feb/2026:08:02:15 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:32:19 [INFO]: ::1 - - [06/Feb/2026:08:02:19 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:32:20 [INFO]: ::1 - - [06/Feb/2026:08:02:20 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:32:24 [INFO]: ::1 - - [06/Feb/2026:08:02:24 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:32:25 [INFO]: ::1 - - [06/Feb/2026:08:02:25 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:34:27 [INFO]: ::1 - - [06/Feb/2026:08:04:27 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:34:28 [INFO]: ::1 - - [06/Feb/2026:08:04:28 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:34:36 [INFO]: ::1 - - [06/Feb/2026:08:04:36 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=past HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:40 [INFO]: ::1 - - [06/Feb/2026:08:04:40 +0000] "GET /meetings?type=upcoming HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=upcoming HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=past HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:41 [INFO]: ::1 - - [06/Feb/2026:08:04:41 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=past HTTP/1.1" - - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=past HTTP/1.1" 200 50 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 54 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:44 [INFO]: ::1 - - [06/Feb/2026:08:04:44 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:47 [INFO]: ::1 - - [06/Feb/2026:08:04:47 +0000] "GET /meetings?type=upcoming HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:34:47 [INFO]: ::1 - - [06/Feb/2026:08:04:47 +0000] "GET /meetings?type=past HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:35:33 [INFO]: ::1 - - [06/Feb/2026:08:05:33 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:37:20 [INFO]: ::1 - - [06/Feb/2026:08:07:20 +0000] "GET /user/ HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:20 [INFO]: ::1 - - [06/Feb/2026:08:07:20 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 551 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:20 [INFO]: ::1 - - [06/Feb/2026:08:07:20 +0000] "GET /meetings?type=past HTTP/1.1" 200 548 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:20 [INFO]: ::1 - - [06/Feb/2026:08:07:20 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 551 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:20 [INFO]: ::1 - - [06/Feb/2026:08:07:20 +0000] "GET /meetings?type=past HTTP/1.1" 200 548 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:28 [INFO]: ::1 - - [06/Feb/2026:08:07:28 +0000] "GET /schedules HTTP/1.1" 200 5175 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:28 [INFO]: ::1 - - [06/Feb/2026:08:07:28 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 551 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:28 [INFO]: ::1 - - [06/Feb/2026:08:07:28 +0000] "GET /meetings?type=past HTTP/1.1" 200 548 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:29 [INFO]: ::1 - - [06/Feb/2026:08:07:29 +0000] "GET /availability HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:30 [INFO]: ::1 - - [06/Feb/2026:08:07:30 +0000] "GET /schedules HTTP/1.1" 304 - "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:30 [INFO]: ::1 - - [06/Feb/2026:08:07:30 +0000] "GET /meetings?type=past HTTP/1.1" 200 548 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:30 [INFO]: ::1 - - [06/Feb/2026:08:07:30 +0000] "GET /meetings?type=upcoming HTTP/1.1" 200 551 "http://localhost:5173/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+2026-02-06 13:37:37 [INFO]: ::1 - - [06/Feb/2026:08:07:37 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:37:38 [INFO]: ::1 - - [06/Feb/2026:08:07:38 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:37:38 [INFO]: ::1 - - [06/Feb/2026:08:07:38 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:37:40 [INFO]: ::1 - - [06/Feb/2026:08:07:40 +0000] "GET /book/user5/6980d3bd7ebee690db2908f8/69857c9b361cb877b857dac3 HTTP/1.1" 404 52 "-" "PostmanRuntime/7.49.1"
+2026-02-06 13:37:44 [INFO]: ::1 - - [06/Feb/2026:08:07:44 +0000] "GET /book/user5/6980565d47e965ecdaf47031/69857c9b361cb877b857dac3 HTTP/1.1" 200 807 "-" "PostmanRuntime/7.49.1"

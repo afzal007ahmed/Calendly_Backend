@@ -1,0 +1,40 @@
+2026-02-06 13:00:11 [ERROR]: Bookings is not defined
+ReferenceError: Bookings is not defined
+    at getDetailsofPublicLink (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/schedule.controller.js:150:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2026-02-06 13:22:20 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:05 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
+2026-02-06 13:23:11 [ERROR]: It should be either past or upcoming
+Error: It should be either past or upcoming
+    at exports.getMeetings (/home/mohdazaan/Learn-Backend/Calendly_Backend/controllers/meeting.controller.js:16:21)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:157:13)
+    at Route.dispatch (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/route.js:117:3)
+    at handle (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:435:11)
+    at Layer.handleRequest (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/lib/layer.js:152:17)
+    at /home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:295:15
+    at processParams (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:582:12)
+    at next (/home/mohdazaan/Learn-Backend/Calendly_Backend/node_modules/router/index.js:291:5)
+    at authMiddleware (/home/mohdazaan/Learn-Backend/Calendly_Backend/middlewares/auth.middleware.js:20:5)
