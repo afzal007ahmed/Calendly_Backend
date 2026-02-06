@@ -8,6 +8,7 @@ const healthRouter = require('./health.route')
 const user = require("./user.route");
 const meeting = require("./meeting.route");
 const availabilityRouter = require("./availability.route");
+const { bookingRouter } = require("./bookings");
 
 router.use('/book', publicLink)
 
@@ -24,5 +25,7 @@ router.use("/meetings", meeting);
 router.use("/availability", availabilityRouter);
 
 router.use("/schedules", scheduleRouter);
+
+router.use("/bookings" , bookingRouter)
 
 module.exports = router;
