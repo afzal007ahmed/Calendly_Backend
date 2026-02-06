@@ -27,14 +27,17 @@ const getAllSchedules = async (req, res, next) => {
       user_id: userId,
     }).select("day from to -_id");
 
-    const response = schedules.map((schedule) => ({
-      _id: schedule._id,
-      meeting_name: schedule.subject,
-      duration: schedule.duration,
-      type_of_meeting: schedule.type_of_meeting==="one" || schedule.type_of_meeting==="group" ? schedule.type_of_meeting : false,
-      availability,
-      public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`,
-    })).filter(b => b.type_of_meeting);
+    const response = schedules
+      .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .map((schedule) => ({
+        _id: schedule._id,
+        meeting_name: schedule.subject,
+        duration: schedule.duration,
+        type_of_meeting : schedule.type_of_meeting,
+        availability,
+        public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`,
+      }))
+      .filter((b) => b.type_of_meeting === "one" || b.type_of_meeting === "group");
 
     res.status(200).json({
       success: true,
