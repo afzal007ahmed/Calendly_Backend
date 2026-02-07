@@ -1,5 +1,6 @@
 const { googleCalenderClient } = require("../config/google.calender.config");
 const bookings = require("../models/bookings");
+const meetings = require("../models/meetings");
 const users = require("../models/users");
 
 const bookingsController = {
@@ -17,12 +18,86 @@ const bookingsController = {
         user.refresh_token,
         user._id,
       );
-      const baseDate = new Date(req.body.date);
-      const from = new Date(baseDate);
-      const to = new Date(baseDate);
 
-      from.setMinutes(from.getMinutes() + req.body.from);
-      to.setMinutes(to.getMinutes() + req.body.to);
+      const { schedule_id, from, to } = req.body;
+
+      const existingBooking = await bookings.findOne({
+        schedule_id: schedule_id,
+        from: from,
+        to: to,
+      });
+
+      if (existingBooking) {
+        const event = await calender.events.get({
+          calendarId: "primary",
+          eventId: existingBooking.meeting_id,
+        });
+        let attendees = [];
+        const alreadyIn = event.data.attendees?.reduce((first, second) => {
+          if (second.email === req.body.guest.email || first) {
+            return true;
+          }
+          return false;
+        }, false);
+
+        if (alreadyIn) {
+          const err = new Error(
+            "You are already in this meeting. Please select a different time slot and date.",
+          );
+          err.code = "GUEST_EXISTS";
+          err.statusCode = 403;
+          throw err;
+        }
+        if (
+          (req.body.type === "one" ||
+            req.body.limit <= existingBooking.guest.length) &&
+          existingBooking
+        ) {
+          const err = new Error("Limit reached for guests.");
+          err.code = "MEETING_LIMIT_REACHED";
+          err.statusCode = 400;
+          throw err;
+        }
+
+        if (event.data.attendees) {
+          attendees = [...event.data.attendees];
+        }
+        attendees = [...attendees, { email: req.body.guest.email }];
+        await calender.events.patch({
+          calendarId: "primary",
+          eventId: existingBooking.meeting_id,
+          sendUpdates: "all",
+          requestBody: {
+            attendees: attendees,
+          },
+        });
+
+        await bookings.updateOne(
+          {
+            meeting_id: existingBooking.meeting_id,
+          },
+          {
+            $push: {
+              guest: {
+                name: req.body.guest.name,
+                email: req.body.guest.email,
+                note: req.body.guest.note,
+              },
+            },
+          },
+        );
+        return res.status(201).send({
+          success: true,
+          error: null,
+        });
+      }
+
+      const baseDate = new Date(req.body.date);
+      const fromTime = new Date(baseDate);
+      const toTime = new Date(baseDate);
+
+      fromTime.setMinutes(fromTime.getMinutes() + req.body.from);
+      toTime.setMinutes(toTime.getMinutes() + req.body.to);
 
       const response = await calender.events.insert({
         calendarId: "primary",
@@ -32,11 +107,11 @@ const bookingsController = {
           summary: req.body.subject,
           description: "Meeting created by Calendly",
           start: {
-            dateTime: from.toISOString(),
+            dateTime: fromTime.toISOString(),
             timeZone: "Asia/Kolkata",
           },
           end: {
-            dateTime: to.toISOString(),
+            dateTime: toTime.toISOString(),
             timeZone: "Asia/Kolkata",
           },
           attendees: [{ email: req.body.guest.email }],
@@ -65,12 +140,17 @@ const bookingsController = {
           {
             name: req.body.guest.name,
             email: req.body.guest.email,
-            note: req.body.guest.note ,
+            note: req.body.guest.note,
           },
         ],
       };
 
-      await bookings.create(data);
+      const booking = await bookings.create(data);
+      await meetings.create({
+        booking_id: booking._id,
+        meeting_id: response.data.id,
+        status: true,
+      });
 
       res.status(201).send({
         success: true,
