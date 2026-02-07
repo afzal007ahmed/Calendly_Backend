@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Availability = require("../models/availability");
-const Bookings = require("../models/bookings")
+const Bookings = require("../models/bookings");
 const Users = require("../models/users");
 const Schedule = require("../models/schedule");
 const { config } = require("../config/config");
@@ -34,11 +34,15 @@ const getAllSchedules = async (req, res, next) => {
         _id: schedule._id,
         meeting_name: schedule.subject,
         duration: schedule.duration,
-        type_of_meeting : schedule.type_of_meeting,
+        type_of_meeting: schedule.type_of_meeting,
         availability,
         public_link: `book/${schedule.host_id.name}/${schedule.host_id._id}/${schedule._id}`,
       }))
-      .filter((b) => b.type_of_meeting === "one" || b.type_of_meeting === "group");
+      .filter(
+        (b) =>
+          (b.type_of_meeting === "one" ||
+          b.type_of_meeting === "group")
+      );
 
     res.status(200).json({
       success: true,
@@ -166,7 +170,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
           type_of_meeting: schedule.type_of_meeting,
         },
         availability,
-        bookings
+        bookings,
       },
     });
   } catch (err) {
@@ -208,9 +212,38 @@ const createSchedule = async (req, res, next) => {
   }
 };
 
+const deleteSchedule = async (req, res, next) => {
+  try {
+    console.log(req.body);
+    const userId = req.user?.id;
+    const { ids } = req.body; 
+
+    if (!userId) {
+      return res.status(401).json({ code: "UNAUTHORIZED", message: "User not authenticated" });
+    }
+
+    if (!ids || !Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ code: "BAD_REQUEST", message: "No IDs provided" });
+    }
+
+    // const objectIds = ids.map(id => new mongoose.Types.ObjectId(id));
+
+    await Schedule.updateMany(
+      { _id: { $in: ids } },
+      { $set: { isDeleted: true } } 
+    );
+
+    res.status(200).json({ success: true, message: "Deleted successfully!" });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ code: "ERROR_DELETING_SCHEDULES", message: err.message });
+  }
+};
+
 module.exports = {
   getAllSchedules,
   getScheduleById,
   getDetailsofPublicLink,
   createSchedule,
+  deleteSchedule,
 };
