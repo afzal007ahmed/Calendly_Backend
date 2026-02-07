@@ -148,9 +148,8 @@ const getDetailsofPublicLink = async (req, res, next) => {
       user_id: user._id,
     }).select("day from to -_id");
 
-    const bookings = await Bookings.findOne({
+    const bookings = await Bookings.find({
       host_id: user._id,
-      schedule_id
     }).select("-_id");
 
     res.status(200).json({
