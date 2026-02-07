@@ -7,6 +7,7 @@ const bookingsController = {
   createBooking: async (req, res, next) => {
     try {
       const user = await users.findOne({ _id: req.body.host_id });
+      console.log(user);
       if (!user) {
         const err = new Error("Invalid host.");
         ((err.code = "INVALID_HOST"), (err.statusCode = 404));
