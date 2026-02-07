@@ -168,6 +168,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
           meeting_name: schedule.subject,
           duration: schedule.duration,
           type_of_meeting: schedule.type_of_meeting,
+          limit : schedule.limit
         },
         availability,
         bookings,
