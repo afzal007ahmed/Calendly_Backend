@@ -161,6 +161,42 @@ const bookingsController = {
       next(error);
     }
   },
+  deleteBooking: async (req, res, next) => {
+    try {
+      const { meeting_id } = req.params;
+      const data = await meetings.updateOne(
+        {
+          meeting_id: meeting_id,
+        },
+        {
+          $set: {
+            status: false,
+          },
+        },
+      );
+      const id = req.user?.id;
+
+      const { access_token, refresh_token } = await users.findOne({ _id: id });
+      const calender = await googleCalenderClient(
+        access_token,
+        refresh_token,
+        id,
+      );
+
+      const response = await calender.events.delete({
+        calendarId: "primary",
+        eventId: meeting_id,
+        sendUpdates: "all",
+      });
+
+      res.status(200).send({
+        success: true,
+        error: null,
+      });
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = { bookingsController };
