@@ -179,7 +179,7 @@ const getDetailsofPublicLink = async (req, res, next) => {
 const createSchedule = async (req, res, next) => {
   try {
     const userId = req.user?.id;
-    const { meeting_name, type_of_meeting, duration } = req.body;
+    const { meeting_name, type_of_meeting, duration  } = req.body;
 
     if (!userId) {
       return res.status(401).json({
@@ -191,8 +191,9 @@ const createSchedule = async (req, res, next) => {
     const schedule = await Schedule.create({
       host_id: userId,
       subject: meeting_name,
-      duration,
-      type_of_meeting,
+      duration : duration,
+      limit : req.body.limit ,
+      type_of_meeting : type_of_meeting,
       isDeleted: false,
     });
 
