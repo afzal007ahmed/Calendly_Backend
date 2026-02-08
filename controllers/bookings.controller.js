@@ -10,14 +10,14 @@ const bookingsController = {
       console.log(user);
       if (!user) {
         const err = new Error("Invalid host.");
-        ((err.code = "INVALID_HOST"), (err.statusCode = 404));
+        (err.code = "INVALID_HOST"), (err.statusCode = 404);
         throw err;
       }
 
       const calender = await googleCalenderClient(
         user.access_token,
         user.refresh_token,
-        user._id,
+        user._id
       );
 
       const { schedule_id, from, to } = req.body;
@@ -43,7 +43,7 @@ const bookingsController = {
 
         if (alreadyIn) {
           const err = new Error(
-            "You are already in this meeting. Please select a different time slot and date.",
+            "You are already in this meeting. Please select a different time slot and date."
           );
           err.code = "GUEST_EXISTS";
           err.statusCode = 403;
@@ -85,7 +85,7 @@ const bookingsController = {
                 note: req.body.guest.note,
               },
             },
-          },
+          }
         );
         return res.status(201).send({
           success: true,
@@ -164,37 +164,80 @@ const bookingsController = {
   deleteBooking: async (req, res, next) => {
     try {
       const { meeting_id } = req.params;
-      const data = await meetings.updateOne(
-        {
-          meeting_id: meeting_id,
-        },
-        {
-          $set: {
-            status: false,
-          },
-        },
-      );
-      const id = req.user?.id;
 
-      const { access_token, refresh_token } = await users.findOne({ _id: id });
-      const calender = await googleCalenderClient(
-        access_token,
-        refresh_token,
-        id,
-      );
+      const userId = req.user?.id;
 
-      const response = await calender.events.delete({
-        calendarId: "primary",
-        eventId: meeting_id,
-        sendUpdates: "all",
+      if (!meeting_id) {
+        return res.status(400).json({
+          success: false,
+          message: "Meeting ID is required",
+        });
+      }
+
+      if (!userId) {
+        return res.status(401).json({
+          success: false,
+          message: "Unauthorized",
+        });
+      }
+
+      const meeting = await meetings.findById(meeting_id);
+
+      if (!meeting) {
+        return res.status(404).json({
+          success: false,
+          message: "Meeting not found",
+        });
+      }
+
+      await meetings.findByIdAndUpdate(meeting_id, {
+        status: false,
       });
 
-      res.status(200).send({
+      const user = await users.findById(userId);
+
+      if (!user) {
+        return res.status(404).json({
+          success: false,
+          message: "User not found",
+        });
+      }
+
+      if (!user.access_token || !user.refresh_token) {
+        return res.status(403).json({
+          success: false,
+          message: "Google Calendar not connected",
+        });
+      }
+
+      // ✅ Init calendar
+      const calendar = await googleCalenderClient(
+        user.access_token,
+        user.refresh_token,
+        userId
+      );
+
+      try {
+        await calendar.events.delete({
+          calendarId: "primary",
+          eventId: meeting_id,
+          sendUpdates: "all",
+        });
+      } catch (err) {
+        console.error("Google Calendar delete failed:", err.message);
+      }
+
+      return res.status(200).json({
         success: true,
-        error: null,
+        message: "Meeting cancelled",
       });
     } catch (error) {
-      next(error);
+      console.error("Delete booking error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Failed to cancel meeting",
+      });
     }
   },
 };
