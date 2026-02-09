@@ -215,7 +215,6 @@ const createSchedule = async (req, res, next) => {
 
 const deleteSchedule = async (req, res, next) => {
   try {
-    console.log(req.body);
     const userId = req.user?.id;
     const { ids } = req.body; 
 
@@ -236,7 +235,6 @@ const deleteSchedule = async (req, res, next) => {
 
     res.status(200).json({ success: true, message: "Deleted successfully!" });
   } catch (err) {
-    console.error("Error:", err);
     res.status(500).json({ code: "ERROR_DELETING_SCHEDULES", message: err.message });
   }
 };
