@@ -3,7 +3,6 @@ const Availability = require("../models/availability");
 const Bookings = require("../models/bookings");
 const Users = require("../models/users");
 const Schedule = require("../models/schedule");
-const { config } = require("../config/config");
 
 const getAllSchedules = async (req, res, next) => {
   try {
@@ -96,6 +95,7 @@ const getScheduleById = async (req, res, next) => {
       data: {
         _id: schedule._id,
         meeting_name: schedule.subject,
+        limit : schedule.limit,
         duration: schedule.duration,
         type_of_meeting: schedule.type_of_meeting,
         availability,
@@ -241,10 +241,61 @@ const deleteSchedule = async (req, res, next) => {
   }
 };
 
+const updateSchedule = async (req, res) => {
+  try {
+    const userId = req.user?.id;
+    const { scheduleId } = req.params;
+    const { duration, limit, subject } = req.body;
+
+    if (!userId) {
+      return res.status(401).json({
+        code: "UNAUTHORIZED",
+        message: "User not authenticated",
+      });
+    }
+
+    if (!scheduleId) {
+      return res.status(400).json({
+        code: "OTHER",
+        message: "ID missing",
+      });
+    }
+
+    if (!duration && !limit && !subject) {
+      return res.status(400).json({
+        code: "OTHER",
+        message: "Field missing to update",
+      });
+    }
+
+    const schedule = await Schedule.updateOne(
+      { _id: scheduleId },
+      {
+        $set: {
+          duration,
+          limit,
+          subject
+        },
+      },
+    );
+
+    return res.status(200).json({
+      success: true,
+      message : "Updated successfully!",
+    });
+  } catch (err) {
+    return res.status(400).json({
+      code: "OTHER",
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   getAllSchedules,
   getScheduleById,
   getDetailsofPublicLink,
   createSchedule,
   deleteSchedule,
+  updateSchedule
 };

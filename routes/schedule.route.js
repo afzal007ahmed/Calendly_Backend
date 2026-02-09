@@ -5,7 +5,8 @@ const {
   getAllSchedules,
   getScheduleById,
   createSchedule,
-  deleteSchedule
+  deleteSchedule,
+  updateSchedule
 } = require("../controllers/schedule.controller");
 const authMiddleware = require("../middlewares/auth.middleware");
 const { googleAuthMiddleware } = require("../middlewares/googleAuth.middleware")
@@ -15,6 +16,7 @@ router.use(googleAuthMiddleware)
 
 router.get("/", getAllSchedules);
 router.get("/:scheduleId", getScheduleById);
+router.put("/:scheduleId", updateSchedule);
 router.post("/", createSchedule);
 router.post('/delete',deleteSchedule);
 
