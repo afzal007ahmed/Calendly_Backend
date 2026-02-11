@@ -3,7 +3,9 @@
 Lightweight backend for a Calendly-like scheduling app.
 
 ## Folder Structure
+   
 
+   
     ├── app.js
     ├── config
     │   ├── config.js
