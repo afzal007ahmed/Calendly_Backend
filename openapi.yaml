@@ -6,7 +6,7 @@ info:
   description: API documentation for Calendly clone backend
 
 servers:
-  - url: http://localhost:3000
+  - url: https://calendly-backend-0cut.onrender.com
     description: Local development server
 
 paths:
